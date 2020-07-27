@@ -39,74 +39,75 @@ section .text
     global _start
 _start:
 ;****** Op Suma **************
-    mov al, 4
-    mov bl, 2
-    add al, bl        ;eax = eax + ebx
-    add al, '0'        ;ajuste
-    mov [suma], al
+    sumar:
+        mov al, 4
+        mov bl, 2
+        add al, bl        ;eax = eax + ebx
+        add al, '0'        ;ajuste
+        mov [suma], al
+
+        imprimir resultadoS, len_resS
+        imprimir suma, 1
+        imprimir newline, len_nl
+
+        jmp dividir
 ;**** Op Resta **********
-    mov al, 4
-    mov bl, 2
-    sub al, bl        ;eax = eax - ebx
-    add al, '0'        ;ajuste0
-    mov [resta], al
+    restar:    
+        mov al, 4
+        mov bl, 2
+        sub al, bl        ;eax = eax - ebx
+        add al, '0'        ;ajuste0
+        mov [resta], al
+
+        imprimir resultadoR, len_resR
+        imprimir resta, 1
+        imprimir newline, len_nl
+
+        jmp multiplicar
 ;******** Op Multiplicacion ***********
-    mov al, 4
-    mov bl, 2
-    mul bl        ;eax = eax * ebx
-    add al, '0'        ;ajuste
-    mov [multiplicacion], al
+    multiplicar:
+        mov al, 4
+        mov bl, 2
+        mul bl        ;eax = eax * ebx
+        add al, '0'        ;ajuste
+        mov [multiplicacion], al
+
+        imprimir resultadoM, len_resM
+        imprimir multiplicacion, 1    
+        imprimir newline, len_nl
+
+        jmp salir
 ;******** Op Divicion **************
-    mov al, 5
-    mov bl, 2
-    div bl      ;eax = eax / ebx
-    add al, '0'        ;ajuste
-    mov [cociente], al
-    add ah, '0'        ;ajuste
-    mov [residuo], ah
+    dividir:
+        mov al, 5
+        mov bl, 2
+        div bl      ;eax = eax / ebx
+        add al, '0'        ;ajuste
+        mov [cociente], al
+        add ah, '0'        ;ajuste
+        mov [residuo], ah
+
+        imprimir resultadoD, len_resD
+        imprimir cociente, 1
+        imprimir newline, len_nl
+        imprimir sobrante, len_sobrante
+        imprimir residuo, 1
+        imprimir newline, len_nl
+
+        jmp restar
 ;******* Imprimir Suma *******************
-    imprimir resultadoS, len_resS
-    imprimir suma, 1
-    mov eax, 4
-    mov ebx, 1
-    mov ecx, newline
-    mov edx, len_nl
-    int 80h
+    
 
 ;***** Imprimir Resta ********
-    imprimir resultadoR, len_resR
-    imprimir resta, 1
-    mov eax, 4
-    mov ebx, 1
-    mov ecx, newline
-    mov edx, len_nl
-    int 80h
+    
 
 ;****** Imprimir Multiplicacion ************
-    imprimir resultadoM, len_resM
-    imprimir multiplicacion, 1    
-    mov eax, 4
-    mov ebx, 1
-    mov ecx, newline
-    mov edx, len_nl
-    int 80h
+    
 
 ;*******Imprimir Divicion *******
-    imprimir resultadoD, len_resD
-    imprimir cociente, 1
-    mov eax, 4
-    mov ebx, 1
-    mov ecx, newline
-    mov edx, len_nl
-    int 80h
-    imprimir sobrante, len_sobrante
-    imprimir residuo, 1
-    mov eax, 4
-    mov ebx, 1
-    mov ecx, newline
-    mov edx, len_nl
-    int 80h
+    
 
 ;******** Salida del programa **************
-    mov eax, 1
-    int 80H
+    salir:
+        mov eax, 1
+        int 80H
