@@ -41,8 +41,6 @@ imprimirAsterisco:
     mov ecx, 9
     jmp principal
 
-
-
 salir:
     mov eax, 1
     int 80h
