@@ -1,5 +1,5 @@
 ;Josue Macas
-;Programa que imprime un Triangulo invertido con loop
+;Programa que imprime un cuadrado de asteriscon con loop
 
 %macro imprimir 2	
 	mov eax,4		
@@ -19,23 +19,32 @@ section .txt
     global _start
 
 _start:
-    mov ecx, 9
+    mov ecx, 8
+    mov ebx, 1
 
-principal:
+l1:
     push rcx
+    push rbx
+    ;*********** nueva lineas *******
+    ;imprimir newline, len_nl
+    mov ecx, ebx
+    ;pop rcx
+    ;push rcx
 
-imprimirAsterisco:        
+l2:
     push rcx
     ;*********** nueva lineas *******
     imprimir asterisco, 2
     pop rcx
-    loop imprimirAsterisco ; salto a l2, dec cx,
+    loop l2 ; salto a l2, dec cx,
     imprimir newline, len_nl
     ;******** finaliza el loop de las columnas
-
+    pop rbx
     pop rcx
-    loop principal
+    inc ebx
+    loop l1
+    ;****** Finaliza el loop de las filas
 
-salir:
     mov eax, 1
-    int 80h 
+    int 80H
+
