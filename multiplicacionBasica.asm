@@ -55,8 +55,6 @@ ciclo:
     cmp cx, 10
     jnz ciclo
 
-
-
 salir:
     mov eax, 1
     int 80h 

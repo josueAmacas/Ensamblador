@@ -1,5 +1,5 @@
 ;Josue Macas
-;Programa que imprime un cuadrado de asteriscon con loop
+;05-08-2020
 
 %macro imprimir 2	
 	mov eax,4		
@@ -29,13 +29,25 @@ section .txt
 
 _start:
 
-    mov al, 1
-    add al, '0'
-    mov [numero1], al
-    mov cx, 1
+    mov bx, 9
+    mov cx, 10    
 
+l1:
+    push rbx
+    cmp rbx, 0
+    jz salir
+    jmp ciclo
+
+            
 ciclo:
-    push cx
+
+    add bx, '0'
+    mov [numero1], bx   
+
+    dec rcx      
+    push rcx
+    
+
     mov ax, [numero1]
     sub ax, '0'
     mul cx
@@ -44,19 +56,25 @@ ciclo:
 
     add cx, '0'
     mov [numero2], cx
+    
     imprimir numero1, 2
     imprimir msj1, len_msj1
     imprimir numero2, 2
     imprimir msj2, len_msj2
     imprimir resultado, 2
     imprimir newline, len_nl
-    pop cx
-    inc cx
-    cmp cx, 10
+    
+    pop rcx
+    cmp rcx, 0
     jnz ciclo
+    imprimir newline, len_nl
 
-
+    pop rbx
+    dec rbx
+    mov ecx, 10
+    jmp l1
 
 salir:
     mov eax, 1
     int 80h 
+
